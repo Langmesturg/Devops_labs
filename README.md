@@ -1,100 +1,25 @@
-# devops-labs
+# Контейнеризація додатку
 
-## Installation & Setup Instructions
+## Кроки для виконання
 
-Follow these steps to set up the project:
+### Контейнеризація беку
+- Для початку створимо файл `docker-compose.prod.yml` та пропишемо його функціонал (код великий, тому краще скопіювати з файлу)
+- Після, переходимо в `withlist-api`, далі нам потрібно змінити `Dockerfile` та `Dockerfile.dev` (у вас вони можуть збігатись, тому цей пункт опціональний)
 
-1.  **Clone the repository:**
+### Контейнеризація фронту
+- Почнемо зі створення `docker-compose.dev.yml` і пропишемо реалізацію (вона вказана у файлі)
+- Переходимо в `wishlist-ui`, підготуємо `Dockerfile` для роботи з `nginx`
+- В тій же директорії створюємо файл `nginx.conf` та прописуєм конфігурацію (вказана у файлі)
 
-    ```bash
-    git clone https://github.com/DariyVanya/devops-labs.git
-    cd devops-labs
-    ```
+### Підняття додатку
+- Для того щоб запустити додаток, виконаємо в консолі `docker-compose -f docker-compose.prod.yml up --build`</br> (для Linux: `sudo docker-compose -f docker-compose.prod.yml up --build`)
+- Тепер переходимо в браузер та вписуємо в пошукову строку `localhost`
 
-2.  **Navigate to the `wishlist-ui` directory:**
-
-    ```bash
-    cd wishlist-ui
-    ```
-
-3.  **Install dependencies:**
-
-    ```bash
-    npm install
-    ```
-
-4.  **Configure environment variables:**
-
-    *   Create a `.env` file (or use the existing `.env.docker` as a template).
-    *   Set any necessary environment variables for your application, such as API endpoints.  Example using a `.env` file:
-
-        ```
-        VITE_API_URL=http://localhost:8080/api
-        ```
-
-5.  **Run the development server:**
-
-    ```bash
-    npm run dev
-    ```
-
-    This will start the development server, and you can access the application in your browser.  Typically at `http://localhost:5173/`.
-
-
-## Configuration Options
-
-*   **`.env` file:** Configure environment variables such as API endpoints.
-*   **`vite.config.ts` (if present):**  Configure Vite's build process and development server settings.
-*   **`tailwind.config.js` (if present):** Customize the Tailwind CSS configuration.
-
-## Docker Setup
-
-1.  **Build the Docker image:**
-
-    ```bash
-    docker build -f wishlist-ui/Dockerfile -t wishlist-ui .
-    ```
-
-2.  **Run the Docker container:**
-
-    ```bash
-    docker run -p 8080:80 wishlist-ui
-    ```
-
-    This will run the application in a Docker container and expose it on port 8080.
-
-3.  **Using Docker Compose (recommended for multi-service deployments):**
-
-    *   Navigate to the root directory where `docker-compose.yml` resides.
-
-    *   Run:
-
-        ```bash
-        docker-compose up --build
-        ```
-
-        This will build and start all services defined in your `docker-compose.yml` file.
-
-## Contributing Guidelines
-
-Contributions are welcome! To contribute:
-
-1.  Fork the repository.
-2.  Create a new branch for your feature or bug fix.
-3.  Make your changes and commit them with clear, descriptive messages.
-4.  Submit a pull request.
-
-Please follow the existing code style and conventions. Ensure your code is well-documented and tested.
-
-## License Information
-
-License is not specified. Please clarify the license under which this project is released.
-
-## Acknowledgments
-
-*   Vue.js: The progressive JavaScript framework used for building the UI.
-*   TypeScript:  For adding static typing to the JavaScript codebase.
-*   Vite: The lightning-fast build tool.
-*   Tailwind CSS:  For rapid UI development.
-*   Node.js: JavaScript runtime environment.
-*   Docker: For containerization and deployment.
+## Результати
+* Відкриваємо сайт та реєструємось
+  * <img width="890" height="650" alt="image" src="https://github.com/user-attachments/assets/dcea8d03-58e2-4b95-99b3-88c471df637f" /> </br>
+* Після реєстрації (, для перевірки логіна, натискаємо <b>Logout</b>, та вводимо дані користувача, ) ми маємо можливість створити свій <b>Wishlist</b>, вводимо назву та натискаємо <b>Create</b>
+  * <img width="890" height="650" alt="image" src="https://github.com/user-attachments/assets/7220684a-c1f5-4321-8348-6b4525a28253" />
+  * <img width="890" height="650" alt="image" src="https://github.com/user-attachments/assets/7f8b0b38-c670-4d12-841d-a78f8044d64c" /> </br>
+* Відкриваємо створений <b>Wishlist</b> та додаємо туди елементи:
+  * <img width="890" height="650" alt="image" src="https://github.com/user-attachments/assets/3b9a075a-5ed2-4aa3-a775-0fe03c4a8dca" />

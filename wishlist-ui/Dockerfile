@@ -1,21 +1,21 @@
-FROM node:18-alpine AS build
+# Stage 1: build Vue app
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm install
+RUN npm ci
 
 COPY . .
-
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:alpine AS prod
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copy nginx config (optional)
-# COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 
